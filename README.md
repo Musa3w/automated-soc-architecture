@@ -8,7 +8,12 @@ This is a full self-hosted SOAR playbook designed to automate Level 1 SOC workfl
 
 ### 1. Ingestion & Filtering
 A schedule node on n8n regularly pulls new alerts from TheHive 5 (which is integrated with Wazuh) and filters any already processed alerts before they enter the pipeline. Only new security events such as 'sshd: Authentication failed from a public IP' will be piped down to the next stage.
-![Ingestion Phase](ingestion.png)
+
+**Step 1: Fetching New Alerts**
+![Search Alerts Phase](search-alerts.png)
+
+**Step 2: Filtering Processed Alerts**
+![Filtering Phase](filter-node.png)
 
 ### 2. Extraction & Threat Intel Enrichment
 When a critical alert is observed, the alert description will be parsed for any IOCs, specifically the attacker's IP. The IP is then looked up on two threat intelligence platforms:
