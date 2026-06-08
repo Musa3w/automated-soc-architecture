@@ -68,9 +68,18 @@ The automated workflow successfully executes and delivers real-time, actionable 
 * **AI Engine:** Google Gemini 2.0 Flash API
 * **Notifications:** Telegram API, Brevo SMTP (`info@projectcyber.online`)
 
-## 🚀 Deployment & Security Considerations
-* All private details (API Keys, local IPs, Telegram Chat IDs) are hidden for the sake of public demonstration.
-* Import `workflow.json` into your n8n instance and replace all placeholders (`<PLACEHOLDERS>`) with your API Keys and relevant credentials to test.
+## 🚀 System Implementation Guidelines
+Since this workflow contains sensitive API integrations, the source JSON has been excluded from this public repository for security purposes. To implement this architecture in your own environment:
+
+1. **Environment Setup:** Deploy a self-hosted **n8n** instance on a Debian-based server.
+2. **Connectivity:** Configure secure communication channels between **Wazuh** (SIEM) and **TheHive** (Incident Response).
+3. **API Integration:** Within n8n, create dedicated nodes for:
+    * **Threat Intel:** Set up HTTP Request nodes for AbuseIPDB and MISP REST API endpoints.
+    * **AI Triage:** Configure the Google Gemini API node with a "SOC Analyst" system prompt.
+    * **Notifications:** Define your custom Telegram Bot and SMTP (Brevo) credentials.
+4. **Logic Routing:** Utilize n8n’s `If` and `Filter` nodes to implement the high-risk vs. low-risk routing logic based on your specific security thresholds.
+
+*This modular approach allows for rapid scaling and customization according to your organization's specific threat landscape.*
 
 ## 👤 Author
 **Anar Musayev**
