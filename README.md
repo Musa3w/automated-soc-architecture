@@ -17,9 +17,18 @@ A schedule node on n8n regularly pulls new alerts from TheHive 5 (which is integ
 
 ### 2. Extraction & Threat Intel Enrichment
 When a critical alert is observed, the alert description will be parsed for any IOCs, specifically the attacker's IP. The IP is then looked up on two threat intelligence platforms:
-* **AbuseIPDB:** (for global abuse confidence score)
-* **MISP:** (for any previously discovered local or community threats associated with the IP).
-![Enrichment Phase](threat-intel-enrichment.png)
+
+**Step 1: IP Extraction**
+The attacker's IP address is safely extracted from the raw alert data using a manual mapping node.
+![IP Extraction Phase](ip-extraction.png)
+
+**Step 2: AbuseIPDB Check**
+The extracted IP is queried against AbuseIPDB via API to retrieve the global abuse confidence score.
+![AbuseIPDB Enrichment](abuseipdb.png)
+
+**Step 3: MISP Threat Intel**
+Simultaneously, the IP is searched in a custom MISP instance (Malware Information Sharing Platform) to check for any previously discovered local or community-shared threats.
+![MISP Enrichment](misp.png)
 
 ### 3. AI Triage (Gemini 2.0 Flash)
 All enriched data points from the above stages will be passed to Google Gemini through a specialized prompt that assigns the AI the role of an L1 SOC analyst to categorize the threat based on whether it is CASE (High-Risk) or IGNORE (Low-Risk), considering both the AbuseIPDB score and the number of threat events on MISP.
