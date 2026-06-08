@@ -41,10 +41,24 @@ The alert is then routed to one of two different paths depending on whether it w
 ![Case Creation & Routing](promote-to-case.png)
 
 ### 5. Multi-Channel Notifications
-To promptly inform the SOC team of high-risk cases, multiple communication channels are used:
-* **Telegram Bot API:** An alert is sent directly to the team's secure chat.
-* **Transactional Email (Brevo):** A rich HTML email is sent with the detailed information regarding the alert using a custom domain (`info@projectcyber.online`) to maintain official records.
-![Notifications](email-notification.png)
+To promptly inform the SOC team of high-risk cases, multiple communication channels are configured within the workflow:
+
+**Step 1: Telegram Bot API Configuration**
+An alert is formatted and sent directly to the team's secure chat.
+![Telegram Node](telegram-node.png)
+
+**Step 2: Transactional Email (Brevo) Configuration**
+A rich HTML email is prepared to be sent via a custom domain (`info@projectcyber.online`) to maintain official records.
+![Email Node](email-node.png)
+
+### 6. Proof of Success
+The automated workflow successfully executes and delivers real-time, actionable alerts to the assigned SOC channels:
+
+**Telegram Alert Delivered:**
+![Telegram Alert Success](telegram-alert.png)
+
+**Email Notification Delivered:**
+![Email Alert Success](email-alert.png)
 
 ## 🛠 Technologies Used
 * **SIEM / Endpoint Security:** Wazuh
